@@ -1,0 +1,28 @@
+[constants]
+prefix = '/home/komh/opt/os2emx'
+target = 'i686-pc-os2-emx'
+targetprefix = prefix / target
+
+[binaries]
+c = target + '-gcc'
+cpp = target + '-g++'
+ar = target + '-ar'
+windres = target + '-windres'
+strip = target + '-strip'
+pkg-config = target + '-pkg-config'
+# dummy exe wrapper
+exe_wrapper = 'true'
+
+[host_machine]
+system = 'os/2'
+cpu_family = 'x86'
+cpu = 'i686'
+endian = 'little'
+
+[properties]
+sys_root = targetprefix
+pkg_config_libdir = targetprefix / 'lib/pkgconfig'
+
+[built-in options]
+c_args = ['-idirafter', targetprefix / 'include/os2tk45']
+cpp_args = ['-idirafter', targetprefix / 'include/os2tk45']
