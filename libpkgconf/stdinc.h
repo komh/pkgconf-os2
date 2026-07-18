@@ -101,8 +101,13 @@
 # else
 #  define PKGCONF_ITEM_SIZE (4096 + 1024)
 # endif
-# define PKG_CONFIG_PATH_SEP_S   ":"
-# define PKG_DIR_SEP_S   '/'
+# ifdef __OS2__
+#  define PKG_CONFIG_PATH_SEP_S   ";"
+#  define PKG_DIR_SEP_S   '\\'
+# else
+#  define PKG_CONFIG_PATH_SEP_S   ":"
+#  define PKG_DIR_SEP_S   '/'
+# endif
 #endif
 
 #endif
