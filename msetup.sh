@@ -13,7 +13,7 @@ opts="
     -Dwith-system-libdir=\"/@unixroot/usr/lib;/usr/lib\"
 "
 
-if [ -n "$1" ] && [ "${1#--}" = "$1" ]; then
+if [ -n "$1" ] && [ "${1#-}" = "$1" ]; then
     # $1 is a build dir
     [ -f "$1/meson.build" ] \
         && { echo "BUILD dir should be different from SOURCE dir!!!"; exit 1; }
