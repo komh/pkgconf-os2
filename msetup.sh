@@ -1,23 +1,33 @@
 #! /bin/sh
 
-target=i686-pc-os2-emx
-
 d="$(dirname "$0")"
 
+target=i686-pc-os2-emx
+
+export LDFLAGS=-Zhigh-mem
+
 opts="
-  --prefix=/@unixroot/usr/local
-  -Dwith-system-includedir=\"/@unixroot/usr/include;/usr/include\"
-  -Dwith-system-libdir=\"/@unixroot/usr/lib;/usr/lib\"
-  --default-library=static
-  --cross-file=$d/$target.txt
+    --prefix=/@unixroot/usr/local
+    --default-library=static
+    -Dwith-system-includedir=\"/@unixroot/usr/include;/usr/include\"
+    -Dwith-system-libdir=\"/@unixroot/usr/lib;/usr/lib\"
 "
 
-if [ -f meson.build ]; then
-  blddir=build
+if [ -n "$1" ] && [ "${1#--}" = "$1" ]; then
+    # $1 is a build dir
+    [ -f "$1/meson.build" ] \
+        && { echo "BUILD dir should be different from SOURCE dir!!!"; exit 1; }
+
+    blddir="$1"
+    shift
 else
-  blddir=.
+    # $1 is empty or an option. Determine the build dir with meson.build
+    [ -f meson.build ] && blddir=build || blddir=.
 fi
 
-[ -f "$blddir/build.ninja" ] && reconf=--reconfigure
+srcdir="$d"
 
-eval 'meson setup "$blddir" "$d"' $opts '$reconf "$@"'
+[ -z "$OS2_SHELL" ] && opts="$opts \"--cross-file=$d/$target.txt\""
+[ -f "$blddir/build.ninja" ] && opts="$opts --reconfigure"
+
+eval 'meson setup "$blddir" "$srcdir"' $opts '"$@"'
