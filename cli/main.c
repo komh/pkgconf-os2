@@ -21,10 +21,6 @@
 #include "getopt_long.h"
 #include "core.h"
 
-#ifdef __OS2__
-#include <io.h>
-#endif
-
 static bool
 parse_maximum_traverse_depth(const char *value, int *depth)
 {
@@ -281,11 +277,6 @@ main(int argc, char *argv[])
 	 */
 	_setmode(fileno(stdout), O_BINARY);
 	_setmode(fileno(stderr), O_BINARY);
-#elif __OS2__
-	if (!isatty(fileno(stdout)))
-		setmode(fileno(stdout), O_BINARY);
-	if (!isatty(fileno(stderr)))
-		setmode(fileno(stderr), O_BINARY);
 #endif
 
 	struct pkg_option options[] = {
