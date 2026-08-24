@@ -44,6 +44,11 @@ EXTRA_DIST =	pkg.m4 \
 		t/cli/atleast-version-pass.test \
 		t/cli/cflags-libs.test \
 		t/cli/debug.test \
+		t/cli/define-prefix-boundary.test \
+		t/cli/define-prefix-boundary-sibling.test \
+		t/cli/define-prefix-plain.test \
+		t/cli/define-prefix-trailing-slash.test \
+		t/cli/define-prefix-trailing-slash-cflags.test \
 		t/cli/define-variable.test \
 		t/cli/dont-define-prefix.test \
 		t/cli/dump-personality-loaded.test \
@@ -99,10 +104,13 @@ EXTRA_DIST =	pkg.m4 \
 		t/cli/short-errors.test \
 		t/cli/silence-errors.test \
 		t/cli/simulate.test \
+		t/cli/single-package-limit.out \
+		t/cli/single-package-limit.test \
 		t/cli/solution.test \
 		t/cli/unknown-option.test \
 		t/cli/validate-warning.test \
 		t/cli/validate.test \
+		t/cli/variable-multiple-packages.test \
 		t/cli/variable.test \
 		t/cli/verbose.test \
 		t/cli/version.test \
@@ -160,6 +168,7 @@ EXTRA_DIST =	pkg.m4 \
 		t/basic/uninstalled-not.test \
 		t/basic/uninstalled.test \
 		t/basic/variable-env.test \
+		t/basic/variable-multiple-packages.test \
 		t/basic/variable-no-recursion.test \
 		t/basic/variable.test \
 		t/basic/version-atleast-1.test \
@@ -191,8 +200,13 @@ EXTRA_DIST =	pkg.m4 \
 		t/parser/dollar-sign-escape.test \
 		t/parser/dollar-sign-escape-2.test \
 		t/parser/dos-lineendings.test \
+		t/parser/escape-layers-bare-var-libs.test \
+		t/parser/escape-layers-cflags.test \
+		t/parser/escape-layers-libs.test \
 		t/parser/escaped-backslashes-in-output.test \
 		t/parser/fragment-comment.test \
+		t/parser/fragment-escaped-space-var-cflags.test \
+		t/parser/fragment-escaped-space-var-libs.test \
 		t/parser/fragment-escaping-1.test \
 		t/parser/fragment-escaping-2.test \
 		t/parser/fragment-escaping-3.test \
@@ -215,7 +229,9 @@ EXTRA_DIST =	pkg.m4 \
 		t/parser/multiline-folding-libs.test \
 		t/parser/no-trailing-newline.test \
 		t/parser/paren-quoting.test \
+		t/parser/self-referential-fragment.test \
 		t/parser/shell-quoted-output.test \
+		t/parser/spaces-in-paths.test \
 		t/parser/tilde-quoting-1.test \
 		t/parser/tilde-quoting-2.test \
 		t/parser/truncated-files-should-fail-to-parse.test \
@@ -233,6 +249,10 @@ EXTRA_DIST =	pkg.m4 \
 		t/solver/circular-reference-2.test \
 		t/solver/circular-reference-directpc.test \
 		t/solver/compound-foo-metapackage-3.test \
+		t/solver/conflicts-license.test \
+		t/solver/conflicts-modversion.test \
+		t/solver/conflicts-print-provides.test \
+		t/solver/conflicts-print-requires.test \
 		t/solver/conflicts-solution-error.test \
 		t/solver/conflicts-solution-ignore.test \
 		t/solver/conflicts-solution-is-fine-standalone.test \
@@ -383,6 +403,24 @@ EXTRA_DIST =	pkg.m4 \
 		t/sysroot/fdo-sysroot-system-path-filtering.test \
 		t/sysroot/fdo-sysroot-variable-not-rewritten.test \
 		t/sysroot/idirafter-munge-sysroot.test \
+		t/sysroot/inject-bare-sysrootdir.test \
+		t/sysroot/inject-common-prefix-derived.test \
+		t/sysroot/inject-common-prefix-hardcoded.test \
+		t/sysroot/inject-common-prefix-literal.test \
+		t/sysroot/inject-explicit-cflags.test \
+		t/sysroot/inject-explicit-libs.test \
+		t/sysroot/inject-hardcoded-cflags.test \
+		t/sysroot/inject-hardcoded-libs.test \
+		t/sysroot/inject-isystem-attached.test \
+		t/sysroot/inject-isystem-explicit.test \
+		t/sysroot/inject-isystem-literal.test \
+		t/sysroot/inject-isystem-separate.test \
+		t/sysroot/inject-literal-prefixed.test \
+		t/sysroot/inject-mixed-fragments.test \
+		t/sysroot/inject-multi-fragment-var.test \
+		t/sysroot/inject-prefix-derived.test \
+		t/sysroot/inject-root-sysroot-hardcoded.test \
+		t/sysroot/inject-root-sysroot-isystem.test \
 		t/sysroot/isystem-munge-sysroot.test \
 		t/sysroot/isystem-sysroot-prefixed.test \
 		t/sysroot/no-pc_sysrootdir-rewriting-2.test \
@@ -401,6 +439,10 @@ EXTRA_DIST =	pkg.m4 \
 		t/sysroot/uninstalled-rewriting.test \
 		t/sysroot/variable-rewriting-1.test \
 		t/sysroot/variable-rewriting-2.test \
+		t/sysroot/windows-drive-path-no-inject.test \
+		t/sysroot/windows-sysroot-inject.test \
+		t/sysroot/windows-system-libdir-filter.test \
+		t/sysroot/windows-top-builddir.test \
 		t/tuple/billion-laughs.test \
 		t/tuple/case-sensitivity-1.test \
 		t/tuple/case-sensitivity-2.test \
@@ -408,6 +450,12 @@ EXTRA_DIST =	pkg.m4 \
 		t/tuple/define-variable.test \
 		t/tuple/duplicate-upsert.test \
 		t/tuple/empty-tuple.test \
+		t/tuple/escaped-backslash-variable.test \
+		t/tuple/escaped-whitespace-variable-dquoted.test \
+		t/tuple/escaped-whitespace-variable-nested.test \
+		t/tuple/escaped-whitespace-variable-squoted.test \
+		t/tuple/escaped-whitespace-variable-unquoted.test \
+		t/tuple/escaped-whitespace-variable.test \
 		t/link-abi/default-c.test \
 		t/link-abi/cxx-leaf.test \
 		t/link-abi/cxx-leaf-static.test \
@@ -420,6 +468,12 @@ EXTRA_DIST =	pkg.m4 \
 		tests/api/oom.h \
 		tests/api/test-oom-spdxtool.c \
 		tests/lib-relocatable/lib/pkgconfig/foo.pc \
+		tests/lib-relocatable/abs-boundary/lib/pkgconfig/boundary.pc \
+		tests/lib-relocatable/plain-prefix/lib/pkgconfig/plain.pc \
+		tests/lib-relocatable/trailing-prefix/lib/pkgconfig/trailing.pc \
+		tests/lib1/self-referential-fragment.pc \
+		tests/lib1/maxpkg-first.pc \
+		tests/lib1/maxpkg-second.pc \
 		tests/lib1/argv-parse-2.pc \
 		tests/lib1/billion-laughs.pc \
 		tests/lib1/dollar-sign-escape.pc \
@@ -541,6 +595,25 @@ EXTRA_DIST =	pkg.m4 \
 		tests/lib1/duplicate-tuple.pc \
 		tests/lib1/flag-whitespace.pc \
 		tests/lib1/flag-whitespace-2.pc \
+		tests/lib1/fragment-escaped-space-var.pc \
+		tests/lib1/windows-sysroot-inject.pc \
+		tests/lib1/windows-sysroot-libdir.pc \
+		tests/lib1/windows-system-libdir.pc \
+		tests/lib1/windows-top-builddir.pc \
+		tests/lib1/spaces-in-paths.pc \
+		tests/lib1/sysroot-inject-bare.pc \
+		tests/lib1/sysroot-inject-explicit.pc \
+		tests/lib1/sysroot-inject-hardcoded.pc \
+		tests/lib1/sysroot-inject-isystem-explicit.pc \
+		tests/lib1/sysroot-inject-isystem-literal.pc \
+		tests/lib1/sysroot-inject-isystem-separate.pc \
+		tests/lib1/sysroot-inject-literal.pc \
+		tests/lib1/sysroot-inject-mixed.pc \
+		tests/lib1/sysroot-inject-multi-fragment.pc \
+		tests/lib1/sysroot-inject-prefix.pc \
+		tests/lib1/escape-layers-bare-var.pc \
+		tests/lib1/escape-layers.pc \
+		tests/lib1/sysroot-inject-isystem-attached.pc \
 		tests/lib-pccritic/perfect.pc \
 		tests/lib-pccritic/polluted.pc \
 		tests/lib-pccritic/nodesc.pc \

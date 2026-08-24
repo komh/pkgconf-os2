@@ -1,5 +1,5 @@
 project('pkgconf', 'c',
-  version : '3.0.3',
+  version : '3.0.6',
   license : 'ISC',
   default_options : [
     'c_std=c99',
@@ -66,6 +66,7 @@ endif
 cdata = configuration_data()
 
 check_functions = [
+  ['getc_unlocked', 'stdio.h'],
   ['strndup', 'string.h'],
   ['strdup', 'string.h'],
   ['strncasecmp', 'strings.h'],
@@ -74,6 +75,7 @@ check_functions = [
   ['pledge', 'unistd.h'],
   ['unveil', 'unistd.h'],
   ['readlinkat', 'unistd.h'],
+  ['mkdtemp', 'stdlib.h'],
 ]
 
 # Feature-test macros mirroring those defined globally by the build, so that
